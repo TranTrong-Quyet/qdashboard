@@ -1,13 +1,12 @@
 import React from "react";
-import { ModeToggle } from "@/components/mode-toggle.tsx";
+import { Outlet } from "react-router-dom";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const DashBoard = () => {
   return (
-    <div>
-      <div>
-        <ModeToggle />
-      </div>
-      Dashboard
+    <div className="w-full h-screen">
+      DASHBOARD
+      <Outlet />
     </div>
   );
 };

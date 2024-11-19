@@ -1,13 +1,27 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import { ThemeProvider } from "./components/theme-provider";
 
 import DashBoard from "./views/dashboard/index";
+import LayOut from "./views/layout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <DashBoard />,
+    element: <LayOut />,
+    children: [
+      {
+        path: "/",
+        element: <Navigate to="/dashboard" replace />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashBoard />,
+      },
+    ],
   },
 ]);
 

@@ -4,6 +4,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
     "target": "esnext",
     "useDefineForClassFields": false,
     "lib": ["dom", "esnext"],
