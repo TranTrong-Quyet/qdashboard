@@ -9,6 +9,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import DashBoard from "./views/dashboard/index";
 import LayOut from "./views/layout";
 import Product from "./views/products/index.tsx";
+import Customer from "./views/customers";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/product",
         element: <Product />,
+      },
+      {
+        path: "/customers",
+        element: <Customer />,
       },
     ],
   },

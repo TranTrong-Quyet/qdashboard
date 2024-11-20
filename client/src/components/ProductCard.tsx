@@ -56,9 +56,9 @@ const ProductCard = ({
           in={isExpanded}
           timeout="auto"
           unmountOnExit
-          className="absolute inset-0 bottom-24 bg-slate-500 rounded-md"
+          className="absolute inset-0 bottom-24 bg-yellow-500 rounded-md"
         >
-          <div className="p-4">
+          <div className="p-4 text-black">
             <div>ID: {id}</div>
             <div> Supply: {supply}</div>
             <div> Yealy sale: {stat.updatedAt}</div>
