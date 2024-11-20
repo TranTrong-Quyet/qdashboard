@@ -13,6 +13,10 @@ import generalRoutes from "./routes/general.route.js";
 import managementRoutes from "./routes/management.route.js";
 import salesRoutes from "./routes/sales.route.js";
 
+// data import
+import User from "./models/user.js";
+import { dataUser } from "./data/index.js";
+
 // Configuaration
 dotenv.config();
 const PORT = process.env.PORT || 9002;
@@ -33,43 +37,21 @@ app.use("/client", clientRoutes),
   app.use("/management", managementRoutes),
   app.use("/sales", salesRoutes);
 
-// MongoDB Setup
-const client = new MongoClient(MONGODB_URI, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
+/* MONGOOSE SETUP */
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
-async function connectToDatabase() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB successfully!");
-  } catch (error) {
-    console.error("Failed to connect to MongoDB:", error);
-    process.exit(1); // Exit the application if the database connection fails.
-  }
-}
-
-// Start Server
-(async () => {
-  await connectToDatabase();
-
-  app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
-  });
-
-  // Handle graceful shutdown
-  process.on("SIGINT", async () => {
-    console.log("\nShutting down gracefully...");
-    await client.close();
-    process.exit(0);
-  });
-
-  process.on("SIGTERM", async () => {
-    console.log("\nShutting down gracefully...");
-    await client.close();
-    process.exit(0);
-  });
-})();
+    /* ONLY ADD DATA ONE TIME */
+    // AffiliateStat.insertMany(dataAffiliateStat);
+    // OverallStat.insertMany(dataOverallStat);
+    // Product.insertMany(dataProduct);
+    // ProductStat.insertMany(dataProductStat);
+    // Transaction.insertMany(dataTransaction);
+    User.insertMany(dataUser);
+  })
+  .catch((error) => console.log(`${error} did not connect`));

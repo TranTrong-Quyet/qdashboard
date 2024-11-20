@@ -16,32 +16,37 @@ import {
 // Menu items.
 const items = [
   {
+    groupTitle: null,
+    groupItems: [
+      {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: Home,
+      },
+    ],
+  },
+  {
     groupTitle: "Client Facing",
     groupItems: [
       {
-        title: "Home",
-        url: "#",
+        title: "Products",
+        url: "/product",
         icon: Home,
       },
       {
-        title: "Inbox",
-        url: "#",
+        title: "Customers",
+        url: "customers",
         icon: Inbox,
       },
       {
-        title: "Calendar",
-        url: "#",
+        title: "Transactions",
+        url: "transactions",
         icon: Calendar,
       },
       {
-        title: "Search",
-        url: "#",
+        title: "Geography",
+        url: "geography",
         icon: Search,
-      },
-      {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
       },
     ],
   },
@@ -49,29 +54,39 @@ const items = [
     groupTitle: "Sales",
     groupItems: [
       {
-        title: "Home",
-        url: "#",
+        title: "Overview",
+        url: "overview",
         icon: Home,
       },
       {
-        title: "Inbox",
-        url: "#",
+        title: "Daily",
+        url: "daily",
         icon: Inbox,
       },
       {
-        title: "Calendar",
-        url: "#",
+        title: "Monthly",
+        url: "monthly",
         icon: Calendar,
       },
       {
-        title: "Search",
-        url: "#",
+        title: "Breakdown",
+        url: "breakdown",
         icon: Search,
       },
+    ],
+  },
+  {
+    groupTitle: "Management",
+    groupItems: [
       {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
+        title: "Admin",
+        url: "admin",
+        icon: Home,
+      },
+      {
+        title: "Performance",
+        url: "performance",
+        icon: Inbox,
       },
     ],
   },
@@ -88,15 +103,17 @@ export function AppSidebar() {
       <SidebarContent>
         {items.map((group, groupIndex) => (
           <SidebarGroup key={groupIndex}>
-            <SidebarGroupLabel>{group.groupTitle}</SidebarGroupLabel>
+            <SidebarGroupLabel className="">
+              {group.groupTitle}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               {group.groupItems.map((item) => (
                 <SidebarMenuItem className="list-none" key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
