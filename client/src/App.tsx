@@ -8,6 +8,7 @@ import { ThemeProvider } from "./components/theme-provider";
 
 import DashBoard from "./views/dashboard/index";
 import LayOut from "./views/layout";
+import Product from "./views/products/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/product",
-        element: <h1>Product</h1>,
+        element: <Product />,
       },
     ],
   },
