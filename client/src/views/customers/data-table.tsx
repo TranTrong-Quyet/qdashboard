@@ -29,6 +29,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
+// Import PapaParse for CSV export
+import Papa from "papaparse"; // Added
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -59,6 +61,32 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
   });
+
+  // Add function to handle CSV export
+  const exportToCSV = () => {
+    const csvData = data.map((row) => {
+      const flattenedRow: Record<string, any> = {};
+      columns.forEach((column) => {
+        const accessorKey = column.accessorKey as keyof TData;
+        flattenedRow[accessorKey as string] = row[accessorKey];
+      });
+      return flattenedRow;
+    });
+
+    const csv = Papa.unparse(csvData); // Convert data to CSV
+
+    // Add BOM to ensure UTF-8 compatibility
+    const bom = "\uFEFF";
+    const blob = new Blob([bom + csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "table-data.csv");
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div>
@@ -98,6 +126,7 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
       <div className="rounded-md border text-slate-200">
         <Table>
           <TableHeader>
@@ -166,6 +195,10 @@ export function DataTable<TData, TValue>({
         >
           Next
         </Button>
+      </div>
+      {/* Export CSV button */}
+      <div className="mb-4 w-full  flex flex-row items-end self-end">
+        <Button onClick={exportToCSV}>Export CSV</Button> {/* Added */}
       </div>
     </div>
   );
