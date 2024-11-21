@@ -10,6 +10,7 @@ import DashBoard from "./views/dashboard/index";
 import LayOut from "./views/layout";
 import Product from "./views/products/index.tsx";
 import Customer from "./views/customers";
+import Transaction from "./views/transaction";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/customers",
         element: <Customer />,
+      },
+      {
+        path: "/transactions",
+        element: <Transaction />,
       },
     ],
   },

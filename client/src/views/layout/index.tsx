@@ -1,5 +1,5 @@
 import NavBar from "@/components/NavBar";
-import React, { useId } from "react";
+import React, { useId, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -9,9 +9,8 @@ import { useSelector } from "react-redux";
 
 const LayOut = () => {
   const userId = useSelector((state) => state.global.userId);
-  console.log(userId);
   const { data } = useGetUserQuery(userId);
-  console.log(data);
+
   return (
     <>
       <SidebarProvider defaultOpen={true}>

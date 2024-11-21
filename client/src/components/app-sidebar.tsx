@@ -22,6 +22,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import { useSidebar } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -110,11 +112,17 @@ const items = [
 ];
 
 export function AppSidebar({ user }) {
+  const { state } = useSidebar();
+  console.log(`this is sidebar state ${state}`); // => expanded || collapsed
+
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarHeader className=" p-4">
         <div className="text-xl font-bold font-serif">
-          <Link to={"/dashboard"}>Q Dashboard</Link>
+          <Link to={"/dashboard"}>
+            <span>Q</span>
+            {state === "expanded" && <span> Dashboard</span>}
+          </Link>
         </div>
       </SidebarHeader>
       <SidebarContent>

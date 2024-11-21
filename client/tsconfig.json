@@ -5,7 +5,7 @@
       "@/*": ["./src/*"]
     },
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "target": "esnext",
     "useDefineForClassFields": false,
     "lib": ["dom", "esnext"],
@@ -13,7 +13,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx"
